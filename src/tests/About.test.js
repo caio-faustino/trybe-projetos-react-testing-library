@@ -2,15 +2,19 @@ import { screen } from '@testing-library/react';
 import renderWithRouter from '../renderWithRouter';
 import { About } from '../pages';
 
-describe('Testa o componente <FavoritePokemon.js />.', () => {
-  it('Testa se é exibida na tela a mensagem No favorite pokemon found, caso a pessoa não tenha Pokémon favoritos.', () => {
+describe('Testa o componente <About.js />.', () => {
+  it('Testa se o topo da aplicação contém um conjunto fixo de links de navegação.', () => {
     // Acessar os elementos da Tela
     renderWithRouter(<About />);
     // Interagir com os elementos
-    const favoriteText = screen.getByRole('heading', { name: 'Favorite Pokémon' });
-    const p1 = screen.getByText('No favorite Pokémon found');
+    const aboutText = screen.getByRole('heading', { name: 'About Pokédex' });
+    const p1 = screen.getByText('This application simulates a Pokédex, a digital encyclopedia containing all Pokémon');
+    const p2 = screen.getByText('One can filter Pokémon by type, and see more details for each one of them');
+    const pokedeximage = screen.getByRole('img');
     // Fazer os testes
-    expect(favoriteText).toBeInTheDocument();
+    expect(aboutText).toBeInTheDocument();
     expect(p1).toBeInTheDocument();
+    expect(p2).toBeInTheDocument();
+    expect(pokedeximage).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
   });
 });
